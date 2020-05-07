@@ -1,0 +1,29 @@
+{
+    "extends": ["airbnb"],
+    "env": {
+        "browser": true,
+        "node": true
+    },
+    "rules": {
+        "no-console": "off",
+        "comma-dangle": "off",
+        "react/jsx-filename-extension": "off",
+        // Indent with 4 spaces
+        "indent": ["error", 4],
+
+        // Indent JSX with 4 spaces
+        "react/jsx-indent": ["error", 4],
+
+        // Indent props with 4 spaces
+        "react/jsx-indent-props": ["error", 4],
+        "react/prop-types": 0,
+        "arrow-parens": "off",
+        "implicit-arrow-linebreak": "off",
+        "arrow-body-style": "off",
+        "import/prefer-default-export": "off",
+        "max-len": 0,
+        "import/no-named-as-default-member": 0,
+        "jsx-quotes": "off",
+        "react/jsx-one-expression-per-line": 0
+    }
+}
