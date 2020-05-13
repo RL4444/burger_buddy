@@ -71,7 +71,7 @@ class App extends Component {
             radius: 5000,
             loading: true,
             burgerRestaurants: [],
-            requesting: false,
+            fetchingInitData: false,
             extending: false,
             prompFindLocation: false,
             search: '',
@@ -130,7 +130,7 @@ class App extends Component {
     getBurgerJoints = async (extending = false) => {
         const { location, burgerRestaurants } = this.state;
         this.setState({
-            requesting: burgerRestaurants.length === 0,
+            fetchingInitData: burgerRestaurants.length === 0,
             loading: false,
             extending: burgerRestaurants.length !== 0,
         });
@@ -151,7 +151,7 @@ class App extends Component {
         } catch (err) {
             console.error(err);
         } finally {
-            this.setState({ requesting: false, extending: false });
+            this.setState({ fetchingInitData: false, extending: false });
         }
     };
 
@@ -171,7 +171,7 @@ class App extends Component {
             loading,
             prompFindLocation,
             burgerRestaurants,
-            requesting,
+            fetchingInitData,
             sortBy,
             extending,
             hasNextCursor,
@@ -184,8 +184,8 @@ class App extends Component {
                     {!loading && prompFindLocation && <SearchCities setLocation={this.setLocation} />}
                     {loading && <LoadingIntroScreen />}
                     {!loading && !prompFindLocation && <SortingTabs sortBy={sortBy} setSortBy={this.setSortBy} />}
-                    {requesting && <Skeleton />}
-                    {!requesting && !loading && burgerRestaurants.length > 0 && (
+                    {fetchingInitData && <Skeleton />}
+                    {!fetchingInitData && !loading && burgerRestaurants.length > 0 && (
                         <BurgerTable>
                             <>
                                 {burgerRestaurants.map((r) => {
