@@ -34,7 +34,6 @@ const LoadingIntroScreen = () => {
     return (
         <Container>
             <LoadingWrapper>
-                {/* <h4>Loading</h4> */}
                 <Spinner />
             </LoadingWrapper>
             <Footer>POWERED BY ZOMATO</Footer>

@@ -9,7 +9,7 @@ const Container = styled.div`
     width: 100%;
     position: relative;
     max-width: 400px;
-    padding-top: 20px;
+    padding-top: 40px;
 `;
 
 const SearchBarContainer = styled.div`
@@ -21,6 +21,7 @@ const SearchBarContainer = styled.div`
     display: flex;
     align-items: center;
 `;
+
 const Input = styled.input`
     border: none;
     height: 100%;

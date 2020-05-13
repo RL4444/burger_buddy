@@ -7,9 +7,12 @@ const CardContainer = styled.article`
     display: flex;
     flex-direction: column;
     padding: 16px 8px;
-    border: 1px solid ${(p) => p.theme.colors.orangeOne};;
-    border-radius: 8px;
+    border: 1px solid ${(p) => p.theme.colors.orangeOne};
+    border-radius: 4px;
     margin-top: 10px;
+    @media (min-width: 800px) {
+        margin-top: 18px;
+    }
 `;
 
 const EachRow = styled.div`
@@ -30,32 +33,37 @@ const ImgWrapper = styled.div`
     min-height: 50px;
     box-sizing: border-box;
     object-fit: cover;
+    @media (min-width: 800px) {
+        /*stuff  */
+    }
 `;
 
 const NameAndAdressCol = styled.div`
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
     margin-left: 9px;
 `;
 
 const Title = styled.div`
     font-family: ${(p) => p.theme.fonts.otherTitle};
     font-size: 20px;
-    color: ${(p) => p.theme.colors.orangeOne};;
+    color: ${(p) => p.theme.colors.orangeOne};
+    @media (min-width: 800px) {
+        font-size: 24px;
+    }
 `;
 
 const Address = styled.div`
     font-family: ${(p) => p.theme.fonts.main};
     font-size: 10px;
     color: white;
-`;
-const PhoneImg = styled.img`
-    width: 20px;
+    @media (min-width: 800px) {
+        font-size: 14px;
+    }
 `;
 
 const Row = ({ restaurant, userLatitude, userLongitude }) => {
-    console.log(restaurant);
-    console.log('user Lat & long ', userLatitude, userLongitude);
     return (
         <CardContainer>
             <EachRow>
