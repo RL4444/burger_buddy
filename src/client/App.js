@@ -5,6 +5,9 @@ import LoadingIntroScreen from './views/LoadingIntroScreen';
 import Skeleton from './components/Skeleton';
 import SearchCities from './views/SearchCities';
 import RestaurantRow from './components/RestaurantRow';
+import SortingTabs from './components/SortingTabs';
+import Spinner from './components/Spinner';
+
 const Container = styled.section`
     margin: 0 auto;
     display: flex;
@@ -17,12 +20,31 @@ const Wrapper = styled.section`
     height: 100%;
 `;
 
+const Button = styled.div`
+    background: transparent;
+    color: ${(p) => p.theme.colors.orangeOne};
+    font-family: ${(p) => p.theme.fonts.otherTitle};
+    padding: 6px 12px;
+    box-sizing: border-box;
+    border: 1px solid ${(p) => p.theme.colors.orangeOne};
+    border-radius: 4px;
+    text-align: center;
+    &:hover {
+        background: ${(p) => p.theme.colors.orangeOne};
+        color: black;
+        cursor: pointer;
+    }
+`;
+
 const Title = styled.h1`
-    padding-top: 60px;
+    padding-top: 40px;
     text-align: center;
     color: ${(p) => p.theme.colors.orangeOne};
     font-family: ${(p) => p.theme.fonts.otherTitle};
     font-size: 40px;
+    @media (min-width: 800px) {
+        font-size: 60px;
+    }
 `;
 
 const BurgerTable = styled.section`
@@ -32,29 +54,10 @@ const BurgerTable = styled.section`
     position: relative;
     overflow-y: scroll;
     position: relative;
-    height: 380px;
+    height: 60vh;
     overflow-y: scroll;
 `;
-const SortingTabs = styled.div`
-    text-align: center;
-    margin-top: 30px;
-    display: flex;
-    padding: 0 20px;
-    max-width: 600px;
-    min-width: 280px;
-    justify-content: space-around;
-`;
 
-const SortTab = styled.div`
-    color: ${(p) => p.theme.colors.orangeOne};
-    font-family: ${(p) => p.theme.fonts.otherTitle};
-    font-size: 18px;
-    padding: 8px 20px;
-    &.active {
-        background: ${(p) => p.theme.colors.orangeOne};
-        color: black;
-    }
-`;
 class App extends Component {
     constructor(props) {
         super(props);
@@ -64,13 +67,15 @@ class App extends Component {
             latitude: 0,
             cuisine: 168,
             sortBy: 'rating',
-            direction: 'descending',
+            direction: 'desc',
             radius: 5000,
             loading: true,
             burgerRestaurants: [],
             requesting: false,
+            extending: false,
             prompFindLocation: false,
             search: '',
+            start: 0,
         };
     }
 
@@ -78,10 +83,9 @@ class App extends Component {
         await this.getLocationInfo();
     }
 
-    getLocationInfo = async (id) => {
+    getLocationInfo = async () => {
         try {
             let res = await fetch('/api/getLocation/');
-            if (id) res = await fetch(`/api/getLocation/?cityId=${id}`);
             const data = await res.json();
             if (data.locationNotAvailable) {
                 this.setState({ prompFindLocation: true, loading: false });
@@ -115,7 +119,6 @@ class App extends Component {
     };
     setLocation = (location) => {
         this.setState({ loading: true, prompFindLocation: false }, () => {
-            console.log(location);
             const { name, country_name: countryName, state_name: stateName } = location;
             const query = `${name.toLowerCase()}+${
                 stateName.includes('England') ? 'england' : stateName ? stateName : countryName.toLowerCase()
@@ -124,26 +127,41 @@ class App extends Component {
         });
     };
 
-    getBurgerJoints = async () => {
-        const { location } = this.state;
-        this.setState({ requesting: true, loading: false });
+    getBurgerJoints = async (extending = false) => {
+        const { location, burgerRestaurants } = this.state;
+        this.setState({
+            requesting: burgerRestaurants.length === 0,
+            loading: false,
+            extending: burgerRestaurants.length !== 0,
+        });
         try {
             const { latitude, longitude, entity_id: entityId } = location;
-            const { radius, sortBy, direction } = this.state;
+            const { radius, sortBy, direction, start, burgerRestaurants } = this.state;
             const res = await fetch(
-                `/api/getBurgerJoints/?latitude=${latitude}&longitude=${longitude}&entityId=${entityId}&radius=${radius}&sortBy=${sortBy}&direction=${direction}`
+                `/api/getBurgerJoints/?latitude=${latitude}&longitude=${longitude}&entityId=${entityId}&radius=${radius}&sortBy=${sortBy}&direction=${direction}&start=${start}`
             );
             const { data } = await res.json();
-            this.setState({ burgerRestaurants: data.restaurants, longitude, latitude });
+            const maxRestaurants = data.results_found - 40;
+            this.setState({
+                burgerRestaurants: [...burgerRestaurants, ...data.restaurants],
+                longitude,
+                latitude,
+                hasNextCursor: burgerRestaurants.length + 20 < maxRestaurants,
+            });
         } catch (err) {
-            console.log(err);
+            console.error(err);
         } finally {
-            this.setState({ requesting: false });
+            this.setState({ requesting: false, extending: false });
         }
     };
 
     setSortBy = (sortBy, direction) => {
-        this.setState({ sortBy, direction }, () => this.getBurgerJoints());
+        this.setState({ sortBy, direction, start: 0, burgerRestaurants: [] }, () => this.getBurgerJoints());
+    };
+
+    extendList = () => {
+        const { start } = this.state;
+        this.setState({ start: start + 20 }, () => this.getBurgerJoints());
     };
 
     render() {
@@ -155,6 +173,8 @@ class App extends Component {
             burgerRestaurants,
             requesting,
             sortBy,
+            extending,
+            hasNextCursor,
         } = this.state;
         return (
             <Container>
@@ -163,32 +183,11 @@ class App extends Component {
 
                     {!loading && prompFindLocation && <SearchCities setLocation={this.setLocation} />}
                     {loading && <LoadingIntroScreen />}
-                    {!loading && !prompFindLocation && (
-                        <SortingTabs>
-                            <SortTab
-                                onClick={() => this.setSortBy('cost', 'ascending')}
-                                className={`${sortBy === 'cost' ? 'active' : ''}`}
-                            >
-                                Cheapest
-                            </SortTab>
-                            <SortTab
-                                onClick={() => this.setSortBy('rating', 'descending')}
-                                className={`${sortBy === 'rating' ? 'active' : ''}`}
-                            >
-                                Best
-                            </SortTab>
-                            <SortTab
-                                onClick={() => this.setSortBy('real_distance', 'ascending')}
-                                className={`${sortBy === 'real_distance' ? 'active' : ''}`}
-                            >
-                                Closest
-                            </SortTab>
-                        </SortingTabs>
-                    )}
+                    {!loading && !prompFindLocation && <SortingTabs sortBy={sortBy} setSortBy={this.setSortBy} />}
                     {requesting && <Skeleton />}
                     {!requesting && !loading && burgerRestaurants.length > 0 && (
-                        <>
-                            <BurgerTable>
+                        <BurgerTable>
+                            <>
                                 {burgerRestaurants.map((r) => {
                                     return (
                                         <RestaurantRow
@@ -199,8 +198,19 @@ class App extends Component {
                                         />
                                     );
                                 })}
-                            </BurgerTable>
-                        </>
+                            </>
+                            <div style={{ margin: '1em auto', width: 200 }}>
+                                {extending ? (
+                                    <Spinner width={'40px'} height={'40px'} />
+                                ) : (
+                                    hasNextCursor && (
+                                        <Button type='button' onClick={() => this.extendList()}>
+                                            show more
+                                        </Button>
+                                    )
+                                )}
+                            </div>
+                        </BurgerTable>
                     )}
                 </Wrapper>
             </Container>
