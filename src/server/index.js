@@ -19,7 +19,6 @@ app.get('/api/getLocation/', async (req, res) => {
         res.send({ locationNotAvailable: true, loading: false });
         return;
     }
-    console.log(data);
     data.loading = false;
     res.send({ data });
 });
@@ -47,8 +46,17 @@ app.get('/api/getCityByTerm', async (req, res) => {
 });
 
 app.get('/api/getBurgerJoints', async (req, res) => {
-    const { latitude, longitude, entityId, radius = 5000, sortBy = 'rating', direction = 'descending' } = req.query;
-    const data = await food.getBurgerPlaces(latitude, longitude, entityId, radius, sortBy, direction);
+    const {
+        latitude,
+        longitude,
+        entityId,
+        radius = 5000,
+        sortBy = 'rating',
+        direction = 'descending',
+        start = 0,
+    } = req.query;
+    const data = await food.getBurgerPlaces(latitude, longitude, entityId, radius, sortBy, direction, start);
+    // remove private api key from payload
     data.restaurants.forEach((r) => {
         delete r.restaurant.apikey;
     });

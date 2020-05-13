@@ -16,9 +16,9 @@ module.exports = {
             throw Error(err);
         }
     },
-    getBurgerPlaces: async (latitude, longitude, entityId, radius, sortBy, direction) => {
+    getBurgerPlaces: async (latitude, longitude, entityId, radius, sortBy, direction, start) => {
         try {
-            const url = `https://developers.zomato.com/api/v2.1/search?lat=${latitude}&lon=${longitude}&cuisines=168&sort=${sortBy}&order=${direction}&${radius}`;
+            const url = `https://developers.zomato.com/api/v2.1/search?start=${start}&lat=${latitude}&lon=${longitude}&cuisines=168&sort=${sortBy}&order=${direction}&${radius}`;
             const options = { headers: { 'user-key': ZomatoKey, 'Content-Type': 'application/json' } };
             const res = await fetch(url, options);
             const data = await res.json();
