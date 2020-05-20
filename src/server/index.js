@@ -63,4 +63,12 @@ app.get('/api/getBurgerJoints', async (req, res) => {
     res.send({ data });
 });
 
+app.get('/api/getRestaurantData', async (req, res) => {
+    const { id } = req.query;
+    const data = await food.getRestaurant(id);
+    delete data.apikey;
+    console.log('data before returning ', data);
+    res.send({ data });
+});
+
 app.listen(process.env.PORT || 8080, () => console.log(`Listening on port ${process.env.PORT || 8080}!`));

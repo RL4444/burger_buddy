@@ -7,11 +7,15 @@ const CardContainer = styled.article`
     display: flex;
     flex-direction: column;
     padding: 16px 8px;
-    border: 1px solid ${(p) => p.theme.colors.orangeOne};
     border-radius: 4px;
+    border: 1px solid ${(p) => p.theme.colors.orangeOne};
     margin-top: 10px;
     @media (min-width: 800px) {
         margin-top: 18px;
+    }
+    &:hover {
+        border: 1px solid #8a461c;
+        cursor: pointer;
     }
 `;
 
@@ -63,9 +67,9 @@ const Address = styled.div`
     }
 `;
 
-const Row = ({ restaurant, userLatitude, userLongitude }) => {
+const Row = ({ restaurant, userLatitude, userLongitude, getRestaurant }) => {
     return (
-        <CardContainer>
+        <CardContainer onClick={() => getRestaurant(restaurant.R.res_id)}>
             <EachRow>
                 <ImgWrapper>
                     <Img src={replaceHTTPwithHTTPS(restaurant.thumb)} alt={restaurant.name} />

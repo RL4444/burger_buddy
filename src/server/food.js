@@ -27,4 +27,16 @@ module.exports = {
             throw Error(err);
         }
     },
+    getRestaurant: async (id) => {
+        try {
+            const url = `https://developers.zomato.com/api/v2.1/restaurant?res_id=${id}`;
+            console.log('url ', url);
+            const options = { headers: { 'user-key': ZomatoKey, 'Content-Type': 'application/json' } };
+            const res = await fetch(url, options);
+            const data = await res.json();
+            return data;
+        } catch (err) {
+            throw Error(err);
+        }
+    },
 };

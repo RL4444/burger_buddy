@@ -7,6 +7,8 @@ import SearchCities from './views/SearchCities';
 import RestaurantRow from './components/RestaurantRow';
 import SortingTabs from './components/SortingTabs';
 import Spinner from './components/Spinner';
+import RestaurantCard from './components/RestaurantCard';
+import fetch from 'node-fetch';
 
 const Container = styled.section`
     margin: 0 auto;
@@ -18,6 +20,8 @@ const Container = styled.section`
 const Wrapper = styled.section`
     padding: 0 8px;
     height: 100%;
+    width: 100%;
+    max-width: 600px;
 `;
 
 const Button = styled.div`
@@ -49,6 +53,7 @@ const Title = styled.h1`
 
 const BurgerTable = styled.section`
     max-width: 600px;
+    width: 100%;
     margin-top: 20px;
     padding: 0 20px;
     position: relative;
@@ -76,6 +81,7 @@ class App extends Component {
             prompFindLocation: false,
             search: '',
             start: 0,
+            selectedBurgerPlace: null,
         };
     }
 
@@ -155,6 +161,26 @@ class App extends Component {
         }
     };
 
+    getRestaurant = async (id) => {
+        this.setState({ fetchingInitData: true });
+        try {
+            const url = `/api/getRestaurantData/?id=${id}`;
+            console.log('url ', url);
+            const res = await fetch(url);
+            const { data } = await res.json();
+            console.log('data in fe ', data);
+            this.setState({
+                selectedBurgerPlace: data,
+            });
+        } catch (err) {
+            console.error(err);
+        } finally {
+            this.setState({ fetchingInitData: false });
+        }
+    };
+
+    clearRestaurant = () => this.setState({ selectedBurgerPlace: null });
+
     setSortBy = (sortBy, direction) => {
         this.setState({ sortBy, direction, start: 0, burgerRestaurants: [] }, () => this.getBurgerJoints());
     };
@@ -175,16 +201,20 @@ class App extends Component {
             sortBy,
             extending,
             hasNextCursor,
+            selectedBurgerPlace,
         } = this.state;
         return (
             <Container>
                 <Wrapper>
                     <Title>Burger Buddy</Title>
-
                     {!loading && prompFindLocation && <SearchCities setLocation={this.setLocation} />}
                     {loading && <LoadingIntroScreen />}
                     {!loading && !prompFindLocation && <SortingTabs sortBy={sortBy} setSortBy={this.setSortBy} />}
-                    {fetchingInitData && <Skeleton />}
+                    {fetchingInitData && (
+                        <BurgerTable>
+                            <Skeleton />{' '}
+                        </BurgerTable>
+                    )}
                     {!fetchingInitData && !loading && burgerRestaurants.length > 0 && (
                         <BurgerTable>
                             <>
@@ -195,6 +225,7 @@ class App extends Component {
                                             userLongitude={longitude}
                                             key={r.restaurant.id}
                                             restaurant={r.restaurant}
+                                            getRestaurant={this.getRestaurant}
                                         />
                                     );
                                 })}
@@ -211,6 +242,9 @@ class App extends Component {
                                 )}
                             </div>
                         </BurgerTable>
+                    )}
+                    {selectedBurgerPlace && !fetchingInitData && (
+                        <RestaurantCard clearRestaurant={this.clearRestaurant} restaurant={selectedBurgerPlace} />
                     )}
                 </Wrapper>
             </Container>
