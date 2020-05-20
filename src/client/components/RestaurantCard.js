@@ -41,9 +41,6 @@ const Header = styled.div`
     -webkit-box-shadow: inset 0px 0px 99px 0px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: inset 0px 0px 99px 0px rgba(0, 0, 0, 0.75);
     box-shadow: inset 0px 0px 99px 0px rgba(0, 0, 0, 0.75);
-    /* -webkit-box-shadow: inset 0px -37px 40px 16px rgba(0, 0, 0, 0.75);
-    -moz-box-shadow: inset 0px -37px 40px 16px rgba(0, 0, 0, 0.75);
-    box-shadow: inset 0px -37px 40px 16px rgba(0, 0, 0, 0.75); */
 `;
 
 const CloseIcon = styled.div`
@@ -56,6 +53,7 @@ const CloseIcon = styled.div`
         font-weight: 700;
         &:hover {
             cursor: pointer;
+            color: black;
         }
     }
 `;
