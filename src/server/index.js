@@ -66,8 +66,8 @@ app.get('/api/getBurgerJoints', async (req, res) => {
 app.get('/api/getRestaurantData', async (req, res) => {
     const { id } = req.query;
     const data = await food.getRestaurant(id);
+    // remove private api key from payload
     delete data.apikey;
-    console.log('data before returning ', data);
     res.send({ data });
 });
 

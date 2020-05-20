@@ -168,7 +168,6 @@ class App extends Component {
             console.log('url ', url);
             const res = await fetch(url);
             const { data } = await res.json();
-            console.log('data in fe ', data);
             this.setState({
                 selectedBurgerPlace: data,
             });

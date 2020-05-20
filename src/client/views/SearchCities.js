@@ -123,8 +123,6 @@ class SearchCities extends Component {
             this.setState({
                 citySearchResults,
             });
-            console.log('data in front ', data);
-            console.log('citySearchResults in front ', citySearchResults);
         } catch (err) {
             throw Error(err);
         } finally {
