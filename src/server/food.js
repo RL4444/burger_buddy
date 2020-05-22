@@ -10,6 +10,8 @@ let secrets;
 if (process.env.NODE_ENV === 'development') secrets = require('../../secrets.json');
 else secrets = process.env;
 
+// secrets = require('../../secrets.json');
+
 const ZOMATO_KEY = secrets.ZOMATO_API_KEY;
 
 module.exports = {

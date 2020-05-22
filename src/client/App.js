@@ -88,11 +88,20 @@ class App extends Component {
         await this.getLocationInfo();
     }
 
+    currentLocation = async () => {
+        const URL = 'https://freegeoip.app/json/';
+        const res = await fetch(URL);
+        const geoData = await res.json();
+        return geoData;
+    };
+
     getLocationInfo = async () => {
         try {
-            let res = await fetch('/api/getLocation/');
+            const geoData = await this.currentLocation();
+            const { latitude, longitude } = geoData;
+            const res = await fetch(`/api/getLocation/?latitude=${latitude}&longitude=${longitude}`);
             const data = await res.json();
-            console.log('data ', data);
+
             if (data.locationNotAvailable) {
                 this.setState({ prompFindLocation: true, loading: false });
             } else {

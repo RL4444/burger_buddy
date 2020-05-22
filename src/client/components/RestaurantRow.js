@@ -86,12 +86,18 @@ const Address = styled.div`
 `;
 
 const Row = ({ restaurant, userLatitude, userLongitude, getRestaurant }) => {
-    console.log('thumbnails ', restaurant.thumb, 'for ', restaurant.name);
     return (
         <CardContainer onClick={() => getRestaurant(restaurant.R.res_id)}>
             <EachRow>
                 <ImgWrapper>
-                    <Img src={replaceHTTPwithHTTPS(restaurant.thumb)} alt={restaurant.name} />
+                    <Img
+                        src={
+                            restaurant.thumb.length > 0
+                                ? replaceHTTPwithHTTPS(restaurant.thumb)
+                                : '/public/assets/burger.svg'
+                        }
+                        alt={restaurant.name}
+                    />
                 </ImgWrapper>
                 <NameAndAdressCol>
                     <Title>{restaurant.name}</Title>

@@ -10,18 +10,15 @@ let secrets;
 if (process.env.NODE_ENV === 'development') secrets = require('../../secrets.json');
 else secrets = process.env;
 
+// secrets = require('../../secrets.json');
+
 const ZOMATO_KEY = secrets.ZOMATO_API_KEY;
 const GEO_KEY = secrets.GEO_API_KEY;
 
 module.exports = {
     // eslint-disable-next-line consistent-return
-    get: async () => {
+    get: async ({ latitude, longitude }) => {
         try {
-            const URL = 'https://freegeoip.app/json/';
-            const res = await fetch(URL);
-            const geoData = await res.json();
-            const { latitude, longitude } = geoData;
-
             const ZomatoURL = `https://developers.zomato.com/api/v2.1/geocode?lat=${latitude}&lon=${longitude}`;
             const options = { headers: { 'user-key': ZOMATO_KEY, 'Content-Type': 'application/json' } };
 

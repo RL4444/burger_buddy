@@ -1,5 +1,6 @@
 /* eslint-disable object-curly-newline */
 const express = require('express');
+const path = require('path');
 const location = require('./location.js');
 const food = require('./food.js');
 
@@ -8,13 +9,8 @@ const app = express();
 app.use(express.static('dist'));
 
 app.get('/api/getLocation/', async (req, res) => {
-    if (req.query.cityId) {
-        const { cityId } = req.query;
-        const data = await location.get(cityId);
-        res.send({ data });
-        return;
-    }
-    const data = await location.get();
+    const { latitude, longitude } = req.query;
+    const data = await location.get({ latitude, longitude });
     if (data.locationNotAvailable) {
         res.send({ locationNotAvailable: true, loading: false });
         return;

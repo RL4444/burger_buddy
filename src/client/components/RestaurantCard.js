@@ -5,8 +5,6 @@ import { convertCurrencyToPricing } from '../../utils';
 
 import DetailCard from './DeatilCard';
 
-// import { data } from '../../../restaurantData.json';
-
 const Container = styled.div`
     -webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
