@@ -50,10 +50,10 @@ const ImgWrapper = styled.div`
     box-sizing: border-box;
     object-fit: cover;
     @media (min-width: 800px) {
-        max-width: 80px;
-        max-height: 80px;
-        min-width: 80px;
-        min-height: 80px;
+        max-width: 60px;
+        max-height: 60px;
+        min-width: 60px;
+        min-height: 60px;
     }
 `;
 

@@ -1,3 +1,4 @@
+/* eslint-disable prefer-template */
 import React from 'react';
 import styled from 'styled-components';
 
@@ -151,13 +152,13 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     </div> */}
                     <SocialIconsWrap>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            <SocialIcon src='./public/assets/position.png' />
+                            <SocialIcon src={process.env.PUBLIC_URL + './public/assets/position.png'} />
                         </SocialIconA>
                         <SocialIconA href={`tel:${data.phone_numbers}`} target='_blank'>
-                            <SocialIcon src='./public/assets/phone.svg' />
+                            <SocialIcon src={process.env.PUBLIC_URL + './public/assets/phone.svg'} />
                         </SocialIconA>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            <SocialIcon src='./public/assets/globe.png' />
+                            <SocialIcon src={process.env.PUBLIC_URL + './public/assets/globe.png'} />
                         </SocialIconA>
                     </SocialIconsWrap>
                 </NameAndAddress>
