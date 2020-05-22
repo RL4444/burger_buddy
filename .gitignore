@@ -5,3 +5,4 @@ dist
 yarn.lock
 .process.env
 secrets.json
+restaurantData.json

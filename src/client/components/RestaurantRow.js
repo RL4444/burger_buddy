@@ -8,14 +8,15 @@ const CardContainer = styled.article`
     flex-direction: column;
     padding: 16px 8px;
     border-radius: 4px;
-    border: 1px solid ${(p) => p.theme.colors.orangeOne};
+    background: #1e2426;
     margin-top: 10px;
     @media (min-width: 800px) {
         margin-top: 18px;
+        padding: 15px 18px;
     }
     &:hover {
-        border: 1px solid #8a461c;
         cursor: pointer;
+        background: #323c40;
     }
 `;
 
@@ -26,8 +27,10 @@ const EachRow = styled.div`
 `;
 
 const Img = styled.img`
+    border-radius: 50%;
     width: 100%;
     object-fit: cover;
+    border: 1px solid ${(p) => p.theme.colors.orangeOne};
 `;
 
 const ImgWrapper = styled.div`
@@ -38,15 +41,21 @@ const ImgWrapper = styled.div`
     box-sizing: border-box;
     object-fit: cover;
     @media (min-width: 800px) {
-        /*stuff  */
+        max-width: 80px;
+        max-height: 80px;
+        min-width: 80px;
+        min-height: 80px;
     }
 `;
 
 const NameAndAdressCol = styled.div`
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
     margin-left: 9px;
+    @media (min-width: 800px) {
+        margin-left: 14px;
+    }
 `;
 
 const Title = styled.div`
@@ -68,6 +77,7 @@ const Address = styled.div`
 `;
 
 const Row = ({ restaurant, userLatitude, userLongitude, getRestaurant }) => {
+    console.log('thumbnails ', restaurant.thumb, 'for ', restaurant.name);
     return (
         <CardContainer onClick={() => getRestaurant(restaurant.R.res_id)}>
             <EachRow>
@@ -76,7 +86,7 @@ const Row = ({ restaurant, userLatitude, userLongitude, getRestaurant }) => {
                 </ImgWrapper>
                 <NameAndAdressCol>
                     <Title>{restaurant.name}</Title>
-                    <Address>{restaurant.location && restaurant.location.address}</Address>
+                    {restaurant.location && <Address> {restaurant.location.locality}</Address>}
                 </NameAndAdressCol>
             </EachRow>
             <EachRow style={{ marginTop: 18 }}>
@@ -103,42 +113,3 @@ const Row = ({ restaurant, userLatitude, userLongitude, getRestaurant }) => {
 };
 
 export default Row;
-
-// all_reviews: {reviews: Array(5)}
-// all_reviews_count: 268
-// average_cost_for_two: 30
-// book_again_url: ""
-// book_form_web_view_url: ""
-// cuisines: "Burger, British"
-// currency: "£"
-// deeplink: "zomato://restaurant/6105938"
-// establishment: ["Casual Dining"]
-// establishment_types: []
-// events_url: "https://www.zomato.com/london/patty-bun-marylebone/events#tabtop?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
-// featured_image: "https://b.zmtcdn.com/data/res_imagery/6105938_CHAIN_fd94fae498661d76fdbe62a97d04e6b8.jpg"
-// has_online_delivery: 0
-// has_table_booking: 0
-// highlights: (10) ["Cash", "Lunch", "Serves Alcohol", "Credit Card", "Takeaway Available", "Dinner", "Indoor Seating", "Craft Beer", "Wifi", "Fullbar"]
-// id: "6105938"
-// include_bogo_offers: true
-// is_book_form_web_view: 0
-// is_delivering_now: 0
-// is_table_reservation_supported: 0
-// is_zomato_book_res: 0
-// location: {address: "St Christopher's Place, 54 James Street, Marylebone, London W1U 1HE", locality: "James Street, Marylebone", city: "London", city_id: 61, latitude: "51.5154230000", …}
-// menu_url: "https://www.zomato.com/london/patty-bun-marylebone/menu?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1&openSwipeBox=menu&showMinimal=1#tabtop"
-// mezzo_provider: "OTHER"
-// name: "Patty & Bun"
-// offers: []
-// opentable_support: 0
-// phone_numbers: "020 74873188"
-// photo_count: 238
-// photos: (10) [{…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}, {…}]
-// photos_url: "https://www.zomato.com/london/patty-bun-marylebone/photos?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1#tabtop"
-// price_range: 2
-// store_type: ""
-// switch_to_order_menu: 0
-// thumb: "https://b.zmtcdn.com/data/res_imagery/6105938_CHAIN_fd94fae498661d76fdbe62a97d04e6b8.jpg?fit=around%7C200%3A200&crop=200%3A200%3B%2A%2C%2A"
-// timings: "12 Noon to 11 PM (Mon-Sat),12 Noon to 10 PM (Sun)"
-// url: "https://www.zomato.com/london/patty-bun-marylebone?utm_source=api_basic_user&utm_medium=api&utm_campaign=v2.1"
-// user_rating

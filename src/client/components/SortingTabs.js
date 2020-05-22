@@ -11,28 +11,44 @@ const SortingTabsWrapper = styled.div`
     justify-content: space-around;
 `;
 
-const SortTab = styled.div`
+const SortTab = styled.button`
     color: ${(p) => p.theme.colors.orangeOne};
     font-family: ${(p) => p.theme.fonts.otherTitle};
     font-size: 18px;
     padding: 8px 20px;
+    background: transparent;
+    border: 1px solid transparent;
+    outline: none;
     &.active {
         background: ${(p) => p.theme.colors.orangeOne};
         color: black;
     }
     &:hover {
         cursor: pointer;
+        border: 1px solid ${(p) => p.theme.colors.orangeOne};
     }
 `;
-const SortingTabs = ({ sortBy, setSortBy }) => (
+const SortingTabs = ({ sortBy, setSortBy, disabled }) => (
     <SortingTabsWrapper>
-        <SortTab onClick={() => setSortBy('cost', 'asc')} className={`${sortBy === 'cost' ? 'active' : ''}`}>
+        <SortTab
+            type='button'
+            disabled={disabled}
+            onClick={() => setSortBy('cost', 'asc')}
+            className={`${sortBy === 'cost' ? 'active' : ''}`}
+        >
             Cheapest
         </SortTab>
-        <SortTab onClick={() => setSortBy('rating', 'desc')} className={`${sortBy === 'rating' ? 'active' : ''}`}>
+        <SortTab
+            type='button'
+            disabled={disabled}
+            onClick={() => setSortBy('rating', 'desc')}
+            className={`${sortBy === 'rating' ? 'active' : ''}`}
+        >
             Best
         </SortTab>
         <SortTab
+            type='button'
+            disabled={disabled}
             onClick={() => setSortBy('real_distance', 'asc')}
             className={`${sortBy === 'real_distance' ? 'active' : ''}`}
         >

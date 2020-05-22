@@ -9,7 +9,7 @@ const Container = styled.div`
     width: 100%;
     position: relative;
     max-width: 400px;
-    padding-top: 40px;
+    /* padding-top: 40px; */
 `;
 
 const SearchBarContainer = styled.div`
@@ -85,6 +85,7 @@ const Text = styled.p`
     color: white;
     line-height: 20px;
     text-align: center;
+    margin-top: 26px;
 `;
 
 const ResultRow = ({ city, setLocation, clearSearch }) => (
@@ -147,10 +148,6 @@ class SearchCities extends Component {
         const { setLocation } = this.props;
         return (
             <Container>
-                <Text>
-                    We cannot find your current location. Please search for your current city here.
-                    <br /> Unfortunately Some Cities are not included in Zomato's API.
-                </Text>
                 <SearchBarContainer>
                     <Input
                         placeholder='search cities'
@@ -174,6 +171,10 @@ class SearchCities extends Component {
                             );
                         })}
                 </SearchResultsContainer>
+                <Text>
+                    We cannot find your current location. Please search for your current city here.{' '}
+                    <b>Unfortunately some cities are not included in Zomato's API.</b>
+                </Text>
             </Container>
         );
     }

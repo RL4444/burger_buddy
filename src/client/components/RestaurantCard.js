@@ -72,7 +72,7 @@ const NameAndAddress = styled.div`
     box-shadow: 10px 10px 15px -5px rgba(0, 0, 0, 0.75);
     & h2 {
         font-family: ${(p) => p.theme.fonts.otherTitle};
-        font-size: 50px;
+        font-size: 44px;
     }
 `;
 

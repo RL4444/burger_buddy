@@ -208,7 +208,9 @@ class App extends Component {
                     <Title>Burger Buddy</Title>
                     {!loading && prompFindLocation && <SearchCities setLocation={this.setLocation} />}
                     {loading && <LoadingIntroScreen />}
-                    {!loading && !prompFindLocation && <SortingTabs sortBy={sortBy} setSortBy={this.setSortBy} />}
+                    {!loading && !prompFindLocation && (
+                        <SortingTabs disabled={fetchingInitData} sortBy={sortBy} setSortBy={this.setSortBy} />
+                    )}
                     {fetchingInitData && (
                         <BurgerTable>
                             <Skeleton />{' '}
@@ -231,7 +233,9 @@ class App extends Component {
                             </>
                             <div style={{ margin: '1em auto', width: 200 }}>
                                 {extending ? (
-                                    <Spinner width={'40px'} height={'40px'} />
+                                    <div style={{ marginLeft: 80 }}>
+                                        <Spinner width={'40px'} height={'40px'} />
+                                    </div>
                                 ) : (
                                     hasNextCursor && (
                                         <Button type='button' onClick={() => this.extendList()}>
