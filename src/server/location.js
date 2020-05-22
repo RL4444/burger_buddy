@@ -1,9 +1,17 @@
 const fetch = require('node-fetch');
 
-const secrets = require('../../secrets.json');
+// const secrets = require('../../secrets.json');
+console.log('does this work', process.env.ZOMATO_API_KEY);
+let secrets;
 
-const ZOMATO_KEY = process.env.ZOMATO_API_KEY || secrets.ZOMATO_API_KEY;
-const GEO_KEY = process.env.GEO_API_KEY || secrets.GEO_API_KEY;
+// eslint-disable-next-line global-require
+if (process.env === 'development') secrets = require('../../secrets.json');
+else secrets = process.env;
+
+const ZOMATO_KEY = secrets.ZOMATO_API_KEY;
+const GEO_KEY = secrets.GEO_API_KEY;
+// const ZOMATO_KEY = process.env.ZOMATO_API_KEY || secrets.ZOMATO_API_KEY;
+// const GEO_KEY = process.env.GEO_API_KEY || secrets.GEO_API_KEY;
 
 module.exports = {
     // eslint-disable-next-line consistent-return
@@ -13,8 +21,6 @@ module.exports = {
             const res = await fetch(URL);
             const geoData = await res.json();
             const { latitude, longitude } = geoData;
-            // const latitude = 51.509865;
-            // const longitude = -0.118092;
 
             const ZomatoURL = `https://developers.zomato.com/api/v2.1/geocode?lat=${latitude}&lon=${longitude}`;
             const options = { headers: { 'user-key': ZOMATO_KEY, 'Content-Type': 'application/json' } };

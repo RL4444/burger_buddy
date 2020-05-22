@@ -1,8 +1,12 @@
 const fetch = require('node-fetch');
 
-const secrets = require('../../secrets.json');
+let secrets;
 
-const ZOMATO_KEY = process.env.ZOMATO_API_KEY || secrets.ZOMATO_API_KEY;
+// eslint-disable-next-line global-require
+if (process.env === 'development') secrets = require('../../secrets.json');
+else secrets = process.env;
+
+const ZOMATO_KEY = secrets.ZOMATO_API_KEY;
 
 module.exports = {
     getAllCuisines: async (cityId) => {
