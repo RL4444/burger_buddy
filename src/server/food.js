@@ -2,13 +2,13 @@ const fetch = require('node-fetch');
 
 const secrets = require('../../secrets.json');
 
-const ZomatoKey = secrets.ZOMATO_API_KEY;
+const ZOMATO_KEY = process.env.ZOMATO_API_KEY || secrets.ZOMATO_API_KEY;
 
 module.exports = {
     getAllCuisines: async (cityId) => {
         try {
             const url = `https://developers.zomato.com/api/v2.1/cuisines?city_id=${cityId}`;
-            const options = { headers: { 'user-key': ZomatoKey, 'Content-Type': 'application/json' } };
+            const options = { headers: { 'user-key': ZOMATO_KEY, 'Content-Type': 'application/json' } };
             const res = await fetch(url, options);
             const data = await res.json();
             return data;
@@ -19,7 +19,7 @@ module.exports = {
     getBurgerPlaces: async (latitude, longitude, entityId, radius, sortBy, direction, start) => {
         try {
             const url = `https://developers.zomato.com/api/v2.1/search?start=${start}&lat=${latitude}&lon=${longitude}&cuisines=168&sort=${sortBy}&order=${direction}&${radius}`;
-            const options = { headers: { 'user-key': ZomatoKey, 'Content-Type': 'application/json' } };
+            const options = { headers: { 'user-key': ZOMATO_KEY, 'Content-Type': 'application/json' } };
             const res = await fetch(url, options);
             const data = await res.json();
             return data;
@@ -30,8 +30,7 @@ module.exports = {
     getRestaurant: async (id) => {
         try {
             const url = `https://developers.zomato.com/api/v2.1/restaurant?res_id=${id}`;
-            console.log('url ', url);
-            const options = { headers: { 'user-key': ZomatoKey, 'Content-Type': 'application/json' } };
+            const options = { headers: { 'user-key': ZOMATO_KEY, 'Content-Type': 'application/json' } };
             const res = await fetch(url, options);
             const data = await res.json();
             return data;

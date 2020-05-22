@@ -2,8 +2,8 @@ const fetch = require('node-fetch');
 
 const secrets = require('../../secrets.json');
 
-const ZomatoKey = secrets.ZOMATO_API_KEY;
-const geoApiKey = secrets.GEO_API_KEY;
+const ZOMATO_KEY = process.env.ZOMATO_API_KEY || secrets.ZOMATO_API_KEY;
+const GEO_KEY = process.env.GEO_API_KEY || secrets.GEO_API_KEY;
 
 module.exports = {
     // eslint-disable-next-line consistent-return
@@ -17,7 +17,7 @@ module.exports = {
             // const longitude = -0.118092;
 
             const ZomatoURL = `https://developers.zomato.com/api/v2.1/geocode?lat=${latitude}&lon=${longitude}`;
-            const options = { headers: { 'user-key': ZomatoKey, 'Content-Type': 'application/json' } };
+            const options = { headers: { 'user-key': ZOMATO_KEY, 'Content-Type': 'application/json' } };
 
             const zomatoRes = await fetch(ZomatoURL, options);
             const data = await zomatoRes.json();
@@ -32,7 +32,7 @@ module.exports = {
     search: async (searchTerm) => {
         try {
             const url = `https://developers.zomato.com/api/v2.1/cities?q=${searchTerm}`;
-            const options = { headers: { 'user-key': ZomatoKey, 'Content-Type': 'application/json' } };
+            const options = { headers: { 'user-key': ZOMATO_KEY, 'Content-Type': 'application/json' } };
             const res = await fetch(url, options);
             const data = await res.json();
             return data;
@@ -44,14 +44,13 @@ module.exports = {
     getCityInfoByCoordinates: async (searchTerm) => {
         console.log('looking for info by co-ordinated ', searchTerm);
         try {
-            const url = `http://api.positionstack.com/v1/forward?access_key=${geoApiKey}&query=${searchTerm}`;
+            const url = `http://api.positionstack.com/v1/forward?access_key=${GEO_KEY}&query=${searchTerm}`;
             const res = await fetch(url);
             const { data: locationData } = await res.json();
-            console.log(locationData);
             const location = locationData[0];
             const { latitude, longitude } = location;
             const ZomatoURL = `https://developers.zomato.com/api/v2.1/geocode?lat=${latitude}&lon=${longitude}`;
-            const options = { headers: { 'user-key': ZomatoKey, 'Content-Type': 'application/json' } };
+            const options = { headers: { 'user-key': ZOMATO_KEY, 'Content-Type': 'application/json' } };
 
             const zomatoRes = await fetch(ZomatoURL, options);
             const data = await zomatoRes.json();
