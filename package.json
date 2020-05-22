@@ -10,7 +10,7 @@
         "server": "nodemon src/server/index.js",
         "dev": "concurrently \"npm run server\" \"npm run client\"",
         "kill-server": "kill -9 $(lsof -i:8080 -t)",
-        "heroku-prebuild": "npm install --dev"
+        "heroku-prebuild": "npm install --dev --production=false"
     },
     "author": "Rory Lewis",
     "license": "ISC",
@@ -21,9 +21,7 @@
         "node-fetch": "^2.6.0",
         "react": "^16.5.2",
         "react-dom": "^16.5.2",
-        "styled-components": "^5.0.1"
-    },
-    "devDependencies": {
+        "styled-components": "^5.0.1",
         "@babel/core": "^7.0.0",
         "@babel/plugin-proposal-class-properties": "^7.0.0",
         "@babel/preset-env": "^7.0.0",
@@ -47,5 +45,6 @@
         "webpack": "^4.5.0",
         "webpack-cli": "^3.0.8",
         "webpack-dev-server": "^3.11.0"
-    }
+    },
+    "devDependencies": {}
 }
