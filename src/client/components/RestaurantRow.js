@@ -28,9 +28,18 @@ const EachRow = styled.div`
 
 const Img = styled.img`
     border-radius: 50%;
-    width: 100%;
     object-fit: cover;
     border: 1px solid ${(p) => p.theme.colors.orangeOne};
+    max-width: 50px;
+    max-height: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    @media (min-width: 800px) {
+        max-width: 80px;
+        max-height: 80px;
+        min-width: 80px;
+        min-height: 80px;
+    }
 `;
 
 const ImgWrapper = styled.div`

@@ -8,7 +8,6 @@ import RestaurantRow from './components/RestaurantRow';
 import SortingTabs from './components/SortingTabs';
 import Spinner from './components/Spinner';
 import RestaurantCard from './components/RestaurantCard';
-import fetch from 'node-fetch';
 
 const Container = styled.section`
     margin: 0 auto;
@@ -93,6 +92,7 @@ class App extends Component {
         try {
             let res = await fetch('/api/getLocation/');
             const data = await res.json();
+            console.log('data ', data);
             if (data.locationNotAvailable) {
                 this.setState({ prompFindLocation: true, loading: false });
             } else {
