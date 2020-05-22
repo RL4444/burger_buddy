@@ -120,6 +120,7 @@ class SearchCities extends Component {
         try {
             const res = await fetch(`/api/searchCityByTerm/?searchTerm=${city}`);
             const { data } = await res.json();
+            console.log('data ', data);
             const { location_suggestions: citySearchResults } = data;
             this.setState({
                 citySearchResults,
