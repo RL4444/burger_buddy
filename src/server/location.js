@@ -1,17 +1,17 @@
 const fetch = require('node-fetch');
 
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
 // const secrets = require('../../secrets.json');
-console.log('does this work', process.env.ZOMATO_API_KEY);
 let secrets;
 
 // eslint-disable-next-line global-require
-if (process.env === 'development') secrets = require('../../secrets.json');
+if (process.env.NODE_ENV === 'development') secrets = require('../../secrets.json');
 else secrets = process.env;
 
 const ZOMATO_KEY = secrets.ZOMATO_API_KEY;
 const GEO_KEY = secrets.GEO_API_KEY;
-// const ZOMATO_KEY = process.env.ZOMATO_API_KEY || secrets.ZOMATO_API_KEY;
-// const GEO_KEY = process.env.GEO_API_KEY || secrets.GEO_API_KEY;
 
 module.exports = {
     // eslint-disable-next-line consistent-return
