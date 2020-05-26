@@ -20,7 +20,6 @@ export const getDistanceFromLatitudeLongitude = (lat1, lon1, lat2, lon2, unit) =
 export const replaceHTTPwithHTTPS = (src) => {
     if (src.includes('https://')) return src;
     const fixedSrc = src.replace('http://', 'https://');
-    console.log('fixed src ', fixedSrc);
     return fixedSrc;
 };
 

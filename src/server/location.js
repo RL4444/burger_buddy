@@ -45,7 +45,6 @@ module.exports = {
         }
     },
     getCityInfoByCoordinates: async (searchTerm) => {
-        console.log('looking for info by co-ordinated ', searchTerm);
         try {
             const url = `http://api.positionstack.com/v1/forward?access_key=${GEO_KEY}&query=${searchTerm}`;
             const res = await fetch(url);
