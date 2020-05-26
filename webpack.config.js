@@ -28,6 +28,13 @@ module.exports = {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
                 loader: 'url-loader?limit=100000',
             },
+            {
+                test: /\.(jpg|png|svg)$/,
+                loader: 'file-loader',
+                options: {
+                    name: '[path][name].[hash].[ext]',
+                },
+            },
         ],
     },
     resolve: {
@@ -44,7 +51,7 @@ module.exports = {
         new CleanWebpackPlugin([outputDirectory]),
         new HtmlWebpackPlugin({
             template: './public/index.html',
-            favicon: './public/assets/burger.svg',
+            favicon: './public/burger.svg',
         }),
     ],
 };
