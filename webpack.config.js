@@ -3,7 +3,7 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 // in realtime production this should be 'dist' but heroku is weird
-const outputDirectory = 'public';
+const outputDirectory = 'dist';
 
 module.exports = {
     entry: ['babel-polyfill', './src/client/index.js'],
