@@ -3,10 +3,11 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { convertCurrencyToPricing } from '../../utils';
-// import Globe from '../assets/globe.png';
-// import Phone from '../assets/phone.svg';
-// import Position from '../assets/position.png';
 import DetailCard from './DeatilCard';
+
+const Globe = require('../assets/globe.png');
+const Phone = require('../assets/phone.svg');
+const Position = require('../assets/position.png');
 
 const Container = styled.div`
     -webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
@@ -154,16 +155,16 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     </div> */}
                     <SocialIconsWrap>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            {/* <SocialIcon src={Position} /> */}
-                            <SocialIcon src={require('../assets/position.png')} alt='open location in maps' />
+                            <SocialIcon src={Position} alt='open location in maps' />
+                            {/* <SocialIcon src={require('../assets/position.png')} alt='open location in maps' /> */}
                         </SocialIconA>
                         <SocialIconA href={`tel:${data.phone_numbers}`} target='_blank'>
-                            {/* <SocialIcon src={Phone} /> */}
-                            <SocialIcon src={require('../assets/phone.svg')} alt='call restaurant' />
+                            <SocialIcon src={Phone} alt='call restaurant' />
+                            {/* <SocialIcon src={require('../assets/phone.svg')} alt='call restaurant' /> */}
                         </SocialIconA>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            {/* <SocialIcon src={Globe} /> */}
-                            <SocialIcon src={require('../assets/globe.png')} alt='website' />
+                            <SocialIcon src={Globe} alt='website' />
+                            {/* <SocialIcon src={require('../assets/globe.png')} alt='website' /> */}
                         </SocialIconA>
                     </SocialIconsWrap>
                 </NameAndAddress>
