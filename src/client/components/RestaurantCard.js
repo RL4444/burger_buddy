@@ -3,9 +3,9 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { convertCurrencyToPricing } from '../../utils';
-import Globe from '../assets/globe.png';
-import Phone from '../assets/phone.svg';
-import Position from '../assets/position.png';
+// import Globe from '../assets/globe.png';
+// import Phone from '../assets/phone.svg';
+// import Position from '../assets/position.png';
 import DetailCard from './DeatilCard';
 
 const Container = styled.div`
@@ -154,13 +154,16 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     </div> */}
                     <SocialIconsWrap>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            <SocialIcon src={Position} />
+                            {/* <SocialIcon src={Position} /> */}
+                            <SocialIcon src='../assets/position.png' />
                         </SocialIconA>
                         <SocialIconA href={`tel:${data.phone_numbers}`} target='_blank'>
-                            <SocialIcon src={Phone} />
+                            {/* <SocialIcon src={Phone} /> */}
+                            <SocialIcon src='../assets/phone.svg' />
                         </SocialIconA>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            <SocialIcon src={Globe} />
+                            {/* <SocialIcon src={Globe} /> */}
+                            <SocialIcon src='../assets/globe.png' />
                         </SocialIconA>
                     </SocialIconsWrap>
                 </NameAndAddress>
