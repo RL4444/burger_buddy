@@ -54,7 +54,7 @@ const CloseIcon = styled.div`
         font-weight: 700;
         &:hover {
             cursor: pointer;
-            color: black;
+            color: red;
         }
     }
 `;
@@ -155,15 +155,15 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     <SocialIconsWrap>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
                             {/* <SocialIcon src={Position} /> */}
-                            <SocialIcon src='../assets/position.png' />
+                            <SocialIcon src={require('../assets/position.png')} alt='open location in maps' />
                         </SocialIconA>
                         <SocialIconA href={`tel:${data.phone_numbers}`} target='_blank'>
                             {/* <SocialIcon src={Phone} /> */}
-                            <SocialIcon src='../assets/phone.svg' />
+                            <SocialIcon src={require('../assets/phone.svg')} alt='call restaurant' />
                         </SocialIconA>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
                             {/* <SocialIcon src={Globe} /> */}
-                            <SocialIcon src='../assets/globe.png' />
+                            <SocialIcon src={require('../assets/globe.png')} alt='website' />
                         </SocialIconA>
                     </SocialIconsWrap>
                 </NameAndAddress>
