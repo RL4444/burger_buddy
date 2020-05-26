@@ -53,7 +53,7 @@ const CloseIcon = styled.div`
         font-weight: 700;
         &:hover {
             cursor: pointer;
-            color: red;
+            font-size: 44px;
         }
     }
 `;
