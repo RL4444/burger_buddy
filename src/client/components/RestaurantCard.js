@@ -5,8 +5,6 @@ import styled from 'styled-components';
 import { convertCurrencyToPricing } from '../../utils';
 import DetailCard from './DeatilCard';
 
-import { Globe, Phone, Position } from '../index';
-
 const Container = styled.div`
     -webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);

@@ -28,14 +28,6 @@ module.exports = {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
                 loader: 'url-loader?limit=100000',
             },
-            {
-                test: /\.(jpg|png|svg)$/,
-                loader: 'file-loader',
-                options: {
-                    name: '[name].[ext]',
-                    outputPath: 'images',
-                },
-            },
         ],
     },
     resolve: {
