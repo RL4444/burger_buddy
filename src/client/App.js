@@ -98,8 +98,8 @@ class App extends Component {
     getLocationInfo = async () => {
         try {
             const geoData = await this.currentLocation();
-            console.log('geo Data ', geoData);
             const { latitude, longitude } = geoData;
+
             const res = await fetch(`/api/getLocation/?latitude=${latitude}&longitude=${longitude}`);
             const data = await res.json();
 
