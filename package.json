@@ -1,7 +1,7 @@
 {
-    "name": "where-should-we-eat",
+    "name": "burger-buddy",
     "version": "1.0.0",
-    "description": "Boilerplate to build a full stack web application using React, Node.js, Express and Webpack.",
+    "description": "Burgers Yum. React Yum. Node.js Yum. Nom Nom",
     "main": "src/server/index.js",
     "scripts": {
         "build": "webpack --mode production",
