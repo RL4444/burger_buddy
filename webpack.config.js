@@ -2,13 +2,14 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-const outputDirectory = 'dist';
+// in realtime production this should be 'dist' but heroku is weird
+const outputDirectory = 'public';
 
 module.exports = {
     entry: ['babel-polyfill', './src/client/index.js'],
     output: {
-        path: path.join(__dirname, outputDirectory),
         filename: 'bundle.js',
+        path: path.join(__dirname, outputDirectory),
     },
     module: {
         rules: [
@@ -26,11 +27,6 @@ module.exports = {
             {
                 test: /\.(png|woff|woff2|eot|ttf|svg)$/,
                 loader: 'url-loader?limit=100000',
-                entry: './src/index.js',
-                output: {
-                    filename: 'bundle.js',
-                    path: path.resolve(__dirname, 'public'),
-                },
             },
         ],
     },
