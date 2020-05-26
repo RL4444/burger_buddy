@@ -5,9 +5,7 @@ import styled from 'styled-components';
 import { convertCurrencyToPricing } from '../../utils';
 import DetailCard from './DeatilCard';
 
-const Globe = require('../assets/globe.png');
-const Phone = require('../assets/phone.svg');
-const Position = require('../assets/position.png');
+import { Globe, Phone, Position } from '../index';
 
 const Container = styled.div`
     -webkit-box-shadow: 10px 10px 5px -4px rgba(0, 0, 0, 0.75);
