@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/click-events-have-key-events */
+/* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable prefer-template */
 import React from 'react';
 import styled from 'styled-components';
@@ -98,7 +100,7 @@ const HeaderImg = styled.img`
 `;
 
 const Details = styled.div`
-    margin-top: 24px;
+    margin-top: 34px;
     padding: 0 20px;
     & p {
         font-family: ${(p) => p.theme.fonts.otherTitle};
@@ -151,13 +153,13 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     </div> */}
                     <SocialIconsWrap>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            <SocialIcon src='../assets/position.png' alt='open location in maps' />
+                            <SocialIcon src='/public/assets/position.png' alt='open location in maps' />
                         </SocialIconA>
                         <SocialIconA href={`tel:${data.phone_numbers}`} target='_blank'>
-                            <SocialIcon src='../assets/phone.svg' alt='call restaurant' />
+                            <SocialIcon src='/public/assets/phone.svg' alt='call restaurant' />
                         </SocialIconA>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            <SocialIcon src='../assets/globe.png' alt='website' />
+                            <SocialIcon src='/public/assets/globe.png' alt='website' />
                         </SocialIconA>
                     </SocialIconsWrap>
                 </NameAndAddress>

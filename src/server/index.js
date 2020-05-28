@@ -6,6 +6,7 @@ const food = require('./food.js');
 const app = express();
 
 app.use(express.static('dist'));
+app.use('/public', express.static('public'));
 
 app.get('/api/getLocation/', async (req, res) => {
     const { latitude, longitude } = req.query;
