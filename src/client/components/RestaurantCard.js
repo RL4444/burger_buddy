@@ -113,7 +113,7 @@ const DetailCardWrap = styled.div`
     flex-wrap: wrap;
 `;
 
-const RestaurantImages = styled.div`
+const RestaurantDetailsFlexWrap = styled.div`
     justify-content: center;
     display: flex;
     flex-wrap: wrap;
@@ -128,6 +128,19 @@ const RestaurantImage = styled.img`
     max-height: 70px;
     margin-left: 4px;
     margin-top: 4px;
+    -webkit-box-shadow: 10px 10px 15px -5px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 15px -5px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 15px -5px rgba(0, 0, 0, 0.75);
+`;
+
+const Highlight = styled.div`
+    box-sizing: border-box;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-family: ${(p) => p.theme.fonts.otherTitle};
+    color: ${(p) => p.theme.colors.orangeOne};
+    font-size: 18px;
+    background: black;
     -webkit-box-shadow: 10px 10px 15px -5px rgba(0, 0, 0, 0.75);
     -moz-box-shadow: 10px 10px 15px -5px rgba(0, 0, 0, 0.75);
     box-shadow: 10px 10px 15px -5px rgba(0, 0, 0, 0.75);
@@ -148,9 +161,6 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     <h2 style={{ height: 155 }}>
                         {data.name} <br />
                     </h2>
-                    {/* <div style={{ fontSize: 14, marginTop: 12, padding: 8, lineHeight: '18px' }}>
-                        {data.location.address}
-                    </div> */}
                     <SocialIconsWrap>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
                             <SocialIcon src='/public/assets/position.png' alt='open location in maps' />
@@ -181,12 +191,22 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
             {data.photos && data.photos.length > 0 && (
                 <Section>
                     <h4>Photos</h4>
-                    <RestaurantImages>
+                    <RestaurantDetailsFlexWrap>
                         {data.photos.map(({ photo }) => {
                             console.log('photo ', photo);
                             return <RestaurantImage key={photo.id} src={photo.url} />;
                         })}
-                    </RestaurantImages>
+                    </RestaurantDetailsFlexWrap>
+                </Section>
+            )}
+            {data.highlight.length > 0 && (
+                <Section>
+                    <h4>Highlights</h4>
+                    <RestaurantDetailsFlexWrap>
+                        {data.hightlights.map((highlight) => {
+                            return <Highlight key={highlight}>{highlight}</Highlight>;
+                        })}
+                    </RestaurantDetailsFlexWrap>
                 </Section>
             )}
         </Container>
