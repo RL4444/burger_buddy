@@ -203,7 +203,7 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                 <Section>
                     <h4>Highlights</h4>
                     <RestaurantDetailsFlexWrap>
-                        {data.hightlights.map((highlight) => {
+                        {data.highlights.map((highlight) => {
                             return <Highlight key={highlight}>{highlight}</Highlight>;
                         })}
                     </RestaurantDetailsFlexWrap>
