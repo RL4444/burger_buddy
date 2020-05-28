@@ -136,6 +136,7 @@ const RestaurantImage = styled.img`
 const Highlight = styled.div`
     box-sizing: border-box;
     padding: 8px 16px;
+    margin: 8px 0 0 8px;
     border-radius: 8px;
     font-family: ${(p) => p.theme.fonts.otherTitle};
     color: ${(p) => p.theme.colors.orangeOne};
@@ -147,7 +148,6 @@ const Highlight = styled.div`
 `;
 
 const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
-    console.log('data ', data);
     return (
         <Container>
             <div>
@@ -168,7 +168,7 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                         <SocialIconA href={`tel:${data.phone_numbers}`} target='_blank'>
                             <SocialIcon src='/public/assets/phone.svg' alt='call restaurant' />
                         </SocialIconA>
-                        <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
+                        <SocialIconA href={data.url} target='_blank'>
                             <SocialIcon src='/public/assets/globe.png' alt='website' />
                         </SocialIconA>
                     </SocialIconsWrap>
