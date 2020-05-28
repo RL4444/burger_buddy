@@ -199,7 +199,7 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     </RestaurantDetailsFlexWrap>
                 </Section>
             )}
-            {data.highlight.length > 0 && (
+            {data.highlights && data.highlights.length > 0 && (
                 <Section>
                     <h4>Highlights</h4>
                     <RestaurantDetailsFlexWrap>
