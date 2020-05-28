@@ -2,7 +2,6 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
-// in realtime production this should be 'dist' but heroku is weird
 const outputDirectory = 'dist';
 
 module.exports = {
@@ -25,7 +24,7 @@ module.exports = {
                 use: ['style-loader', 'css-loader'],
             },
             {
-                test: /\.(png|woff|woff2|eot|ttf|svg)$/,
+                test: /\.(png|woff|woff2|eot|ttf|svg|jpeg|JPEG|jpg)$/,
                 loader: 'url-loader?limit=100000',
             },
         ],

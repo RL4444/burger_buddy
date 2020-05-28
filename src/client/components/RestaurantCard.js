@@ -132,6 +132,7 @@ const RestaurantImage = styled.img`
 `;
 
 const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
+    console.log('data ', data);
     return (
         <Container>
             <div>
@@ -150,15 +151,12 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     </div> */}
                     <SocialIconsWrap>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            {/* <SocialIcon src={Position} alt='open location in maps' /> */}
                             <SocialIcon src='../assets/position.png' alt='open location in maps' />
                         </SocialIconA>
                         <SocialIconA href={`tel:${data.phone_numbers}`} target='_blank'>
-                            {/* <SocialIcon src={Phone} alt='call restaurant' /> */}
                             <SocialIcon src='../assets/phone.svg' alt='call restaurant' />
                         </SocialIconA>
                         <SocialIconA href={`http://maps.google.com/?q=${data.location.address}`} target='_blank'>
-                            {/* <SocialIcon src={Globe} alt='website' /> */}
                             <SocialIcon src='../assets/globe.png' alt='website' />
                         </SocialIconA>
                     </SocialIconsWrap>
@@ -183,6 +181,7 @@ const RestaurantCard = ({ clearRestaurant, restaurant: data }) => {
                     <h4>Photos</h4>
                     <RestaurantImages>
                         {data.photos.map(({ photo }) => {
+                            console.log('photo ', photo);
                             return <RestaurantImage key={photo.id} src={photo.url} />;
                         })}
                     </RestaurantImages>
